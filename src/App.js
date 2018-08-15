@@ -27,6 +27,7 @@ class App extends React.Component {
       <div className="container">
 
         <Terminal
+          commandPassThrough={cmd => cmd}
           color="green"
           backgroundColor="black"
           barColor="black"
