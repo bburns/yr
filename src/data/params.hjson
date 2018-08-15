@@ -1,0 +1,16 @@
+// params.hjson
+// Parameters/settings - used by both Python and JavaScript code.
+
+{
+
+  // firebase
+  firebaseConfig: {
+    projectId: the-dark-forest
+    authDomain: the-dark-forest.firebaseapp.com
+    storageBucket: the-dark-forest.appspot.com
+    databaseURL: https://the-dark-forest.firebaseio.com
+    apiKey: AIzaSyBbvVKGkhbAMlrnDl0Id8G17dWduVWXoEU
+    messagingSenderId: 909506400723
+  }
+
+}

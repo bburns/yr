@@ -1,7 +1,8 @@
 // store
 // Create a redux store, which holds all the state for the app.
 
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+// import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, combineReducers } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension'; // so can use with chrome extension
 // import { autoRehydrate } from 'redux-persist'; // automatically persist parts of store to localStorage
 // import createSagaMiddleware from 'redux-saga';
@@ -14,7 +15,7 @@ import reducers from './reducers';
 
 // get list of middleware handlers
 // const sagaMiddleware = createSagaMiddleware();
-const middlewares = [];
+// const middlewares = [];
 // middlewares.push(analytics);
 // middlewares.push(sagaMiddleware);
 // middlewares.push(thunk); // allows async actions
@@ -30,7 +31,7 @@ const preloadedState = undefined;
 
 // get store enhancers
 // see https://github.com/reactjs/redux/blob/master/docs/api/applyMiddleware.md
-const middlewareEnhancer = applyMiddleware(...middlewares);
+// const middlewareEnhancer = applyMiddleware(...middlewares);
 // const hydrateEnhancer = autoRehydrate(); //. ditch this in favor of userdb?
 // const enhancers = composeWithDevTools(
 //   middlewareEnhancer,
