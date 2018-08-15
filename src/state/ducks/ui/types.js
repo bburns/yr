@@ -1,0 +1,37 @@
+// types
+// action types - used by actions.js, and in reporting user actions to google analytics
+
+//. make name match string, eg SPINNER_SHOW, SPINNER_HIDE? ehh
+export default {
+  ADD_COMMUTE: 'Filters:AddCommute',
+  CLEAR_FILTERS: 'Filters:Clear',
+  DELETE_COMMUTE: 'Filters:DeleteCommute',
+  // FETCH_SELECTED_PLACE: 'SelectedPlace:Fetch',
+  // DETAILS_FETCH: 'Details:Fetch',
+  // DETAILS_FETCH_LOADING: 'Details:FetchLoading',
+  // DETAILS_FETCH_FAILED: 'Details:FetchFailed',
+  // DETAILS_FETCH_SUCCESS: 'Details:FetchSuccess',
+  HIDE_SPINNER: 'Spinner:Hide',
+  // PICTURES_FETCH: 'Pictures:Fetch',
+  // PICTURES_FETCH_LOADING: 'Pictures:FetchLoading',
+  // PICTURES_FETCH_FAILED: 'Pictures:FetchFailed',
+  // PICTURES_FETCH_SUCCESS: 'Pictures:FetchSuccess',
+  SET_AREA_TYPE: 'AreaType:Set',
+  // SET_SELECTED_PLACE: 'SelectedPlace:Set',
+  SET_SELECTED_TAB: 'Tab:SetSelected',
+  SET_SHOW_DETAILS: 'Details:SetShow',
+  SET_SHOW_SIDEBAR: 'Sidebar:SetShow',
+  SET_SHOW_TABS: 'Tabs:Show',
+  SHOW_SPINNER: 'Spinner:Show',
+  TOGGLE_COMBINE_FILTERS: 'Filters:ToggleCombine',
+  TOGGLE_FAVORITE: 'Favorite:Toggle',
+  TOGGLE_FAVORITES: 'Favorites:Toggle',
+  TOGGLE_FILTER: 'Filter:Toggle',
+  TOGGLE_SIDEBAR: 'Sidebar:Toggle',
+  TOGGLE_TABLE: 'Table:Toggle',
+  UPDATE_MAP_VIEW: 'Map:UpdateView',
+  UPDATE_RENT_RANGE: 'Filters:UpdateRentRange',
+  UPDATE_SCHOOL_RANGE: 'Filters:UpdateSchoolRange',
+  // UPDATE_SELECTED_PLACE: 'SelectedPlace:Update',
+  WINDOW_RESIZE: 'Window:Resize',
+};

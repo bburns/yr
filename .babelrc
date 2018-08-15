@@ -1,0 +1,27 @@
+// babel settings
+// babel is a javascript compiler - it transforms modern js syntax into older forms
+// browsers can understand.
+{
+  "presets": [
+    // env automatically determines the Babel plugins needed based on your supported
+    // environments (ie browsers)
+    "env"
+  ],
+  "plugins": [
+    // compile ES2015 destructuring to ES5
+    "transform-es2015-destructuring",
+    // transform rest properties for object destructuring assignment and
+    // spread properties for object literals
+    "transform-object-rest-spread",
+    // // css-in-js transformer
+    // "emotion",
+    // [
+    //   "resolver",
+    //   {
+    //     "resolveDirs": [
+    //       "src"
+    //     ]
+    //   }
+    // ]
+  ]
+}
