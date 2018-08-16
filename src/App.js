@@ -26,9 +26,7 @@ function hiii() {
   return "hiii";
 }
 
-function commandHandler(cmd, print) {
-  // print(`-PassedThrough:${cmd}: command not found`);
-  // console.log(cmd);
+function handleOtherCommands(cmd, print) {
   if (cmd[0] === 'pok') {
     database.ref('/chat').once('value').then(function(snapshot) {
       const chatDict = snapshot.val();
@@ -47,9 +45,8 @@ class App extends React.Component {
     return (
       <div className="container">
 
-          {/* commandPassThrough={cmd => cmd} */}
         <Terminal
-          commandPassThrough={commandHandler}
+          commandPassThrough={handleOtherCommands}
           color="green"
           backgroundColor="black"
           barColor="black"
