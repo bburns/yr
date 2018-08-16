@@ -37,6 +37,7 @@ function commandHandler(cmd, print) {
     });
   } else {
     print(cmd);
+    database.ref('/chat').push().set(cmd);
   }
 }
 
