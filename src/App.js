@@ -12,6 +12,7 @@ const commands = {
   quirp: () => "quirp!",
   google: () => window.open('https://www.google.com/', '_blank'),
   hiii: () => hiii(),
+  // pok,
 };
 
 const descriptions = {
@@ -25,6 +26,20 @@ function hiii() {
   return "hiii";
 }
 
+function commandHandler(cmd, print) {
+  // print(`-PassedThrough:${cmd}: command not found`);
+  // console.log(cmd);
+  if (cmd[0] === 'pok') {
+    database.ref('/chat').once('value').then(function(snapshot) {
+      const chatDict = snapshot.val();
+      alert(JSON.stringify(chatDict));
+      const chat = Object.values(chatDict);
+      print(chat);
+    });
+  } else {
+    print(cmd);
+  }
+}
 
 class App extends React.Component {
 
@@ -32,8 +47,9 @@ class App extends React.Component {
     return (
       <div className="container">
 
+          {/* commandPassThrough={cmd => cmd} */}
         <Terminal
-          commandPassThrough={cmd => cmd}
+          commandPassThrough={commandHandler}
           color="green"
           backgroundColor="black"
           barColor="black"
