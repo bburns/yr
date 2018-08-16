@@ -5,6 +5,9 @@ import Terminal from 'terminal-in-react';
 import './App.css';
 import database from 'lib/firebase/database';
 
+
+const chatRef = database.ref('/chat');
+
 const welcomeMessage = "Welcome to the dark forest. An ancient path leads onwards...";
 
 const commands = {
@@ -28,18 +31,28 @@ function hiii() {
 
 function handleOtherCommands(cmd, print) {
   if (cmd[0] === 'pok') {
-    database.ref('/chat').once('value').then(function(snapshot) {
+    chatRef.once('value').then(function(snapshot) {
       const chatDict = snapshot.val();
       const chat = Object.values(chatDict);
       chat.forEach(s => print(s));
     });
   } else {
-    print(cmd);
-    database.ref('/chat').push().set(cmd);
+    // print(cmd);
+    const str = cmd.join(' '); // hmm
+    chatRef.push().set(str);
   }
 }
 
+
+
 class App extends React.Component {
+
+  componentDidMount() {
+    chatRef.on('child_added', function(data) {
+      // addCommentElement(postElement, data.key, data.val().text, data.val().author);
+      console.log(data.val());
+    });
+  }
 
   render() {
     return (
@@ -53,7 +66,7 @@ class App extends React.Component {
           commands={commands}
           descriptions={descriptions}
           msg={welcomeMessage}
-          watchConsoleLogging={false}
+          watchConsoleLogging
           promptSymbol="> "
         />
 
