@@ -32,9 +32,8 @@ function commandHandler(cmd, print) {
   if (cmd[0] === 'pok') {
     database.ref('/chat').once('value').then(function(snapshot) {
       const chatDict = snapshot.val();
-      alert(JSON.stringify(chatDict));
       const chat = Object.values(chatDict);
-      print(chat);
+      chat.forEach(s => print(s));
     });
   } else {
     print(cmd);
