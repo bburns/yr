@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "firebase": "^5.3.1",
+    "hjson": "^3.1.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
@@ -11,13 +12,16 @@
     "terminal-in-react": "^4.3.0"
   },
   "devDependencies": {
+    "hjson-loader": "^1.0.0",
+    "react-app-rewired": "^1.5.2",
     "react-scripts": "1.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build && mv build/index.html build/200.html && surge build"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "deploy": "yarn build && mv build/index.html build/200.html && surge build",
+    "analyze": "yarn build && source-map-explorer build/static/js/main.*",
+    "test": "react-app-rewired test --env=jsdom --browser",
+    "eject": "react-app-rewired eject"
   }
 }
