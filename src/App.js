@@ -4,6 +4,7 @@ import React from 'react';
 import Terminal from 'terminal-in-react';
 import './App.css';
 import database from 'lib/firebase/database';
+import SignIn from './signin';
 
 
 const chatRef = database.ref('/chat');
@@ -23,6 +24,7 @@ const descriptions = {
   quirp: "a blue mushroom",
   google: "search google.com",
   hiii: "say hiii",
+  show: false,
 };
 
 function hiii() {
@@ -58,6 +60,7 @@ class App extends React.Component {
     return (
       <div className="container">
 
+        <SignIn />
         <Terminal
           commandPassThrough={handleOtherCommands}
           color="green"
