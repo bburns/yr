@@ -23,6 +23,7 @@ yarn-error.log*
 # public/
 
 
+annex/
 screenshots/
 
 
