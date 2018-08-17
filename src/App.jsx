@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Terminal from 'terminal-in-react';
+import dayjs from 'dayjs';
 
 import database from 'lib/firebase/database';
 import { auth } from 'lib/firebase/auth';
@@ -35,6 +36,8 @@ function hiii() {
 
 
 
+
+
 class App extends React.Component {
 
   state = {
@@ -51,6 +54,8 @@ class App extends React.Component {
       // console.log(data.val());
       const post = data.val();
       //. add pic url also
+      // const datetime = dayjs(post.createdAt).format('YYYY-MM-DD HH:mm:ss');
+      // const msg = post.userName + ' [' + datetime + ']: ' + post.text;
       const msg = post.userName + ' [' + post.createdAt + ']: ' + post.text;
       console.log(msg);
     });
@@ -58,13 +63,7 @@ class App extends React.Component {
     const me = this;
     auth.onAuthStateChanged(function(user) {
       if (user) {
-        // var displayName = user.displayName;
-        // var photoURL = user.photoURL;
-        // var uid = user.uid;
-        const state = { userId: user.uid, userName: user.displayName, userPic: user.photoURL };
-        // console.log(state);
-        me.setState(state);
-        // me.user = state;
+        me.setState({ userId: user.uid, userName: user.displayName, userPic: user.photoURL });
       } else {
         me.setState({ userId: null, userName: null, userPic: null });
       }
@@ -72,7 +71,8 @@ class App extends React.Component {
   }
 
   _handleOtherCommands = (cmd, print) => {
-    // if (cmd[0] === 'pok') {
+
+    // if (cmd[0] === 'review') {
     //   chatRef.once('value').then(function(snapshot) {
     //     const chatDict = snapshot.val();
     //     const chat = Object.values(chatDict);
@@ -80,19 +80,14 @@ class App extends React.Component {
     //   });
     // } else {
 
-    // print(cmd); // an array of words
-    const text = cmd.join(' '); //. dubious
-    // chatRef.push().set(text); // add to chat log
-    // console.log(this.state); //. all nulls whyyy?
+    const text = cmd.join(' '); //. dubious, but cmd is an array of words, not a string
+    const createdAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
     const post = {
       userName: this.state.userName,
-      // userName: this.user.userName,
       text,
-      createdAt: String(new Date()),
+      createdAt,
     };
-    // console.log(post);
     chatRef.push().set(post);
-    // }
   }
   
   render() {
