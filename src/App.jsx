@@ -15,24 +15,24 @@ const chatRef = database.ref('/chat');
 const welcomeMessage = "Welcome to the dark forest. An ancient path leads onwards...";
 
 const commands = {
-  glomp: () => alert("glomp glomp glomp!"),
-  quirp: () => "quirp!",
-  google: () => window.open('https://www.google.com/', '_blank'),
-  hiii: () => hiii(),
+  // glomp: () => alert("glomp glomp glomp!"),
+  // quirp: () => "quirp!",
+  // google: () => window.open('https://www.google.com/', '_blank'),
+  // hiii: () => hiii(),
   // pok,
 };
 
 const descriptions = {
-  glomp: "glomp-attack!",
-  quirp: "a blue mushroom",
-  google: "search google.com",
-  hiii: "say hiii",
+  // glomp: "glomp-attack!",
+  // quirp: "a blue mushroom",
+  // google: "search google.com",
+  // hiii: "say hiii",
   show: false,
 };
 
-function hiii() {
-  return "hiii";
-}
+// function hiii() {
+//   return "hiii";
+// }
 
 
 
