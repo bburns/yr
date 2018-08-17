@@ -44,23 +44,33 @@ class App extends React.Component {
     userId: null,
     userName: null,
     userPic: null,
+    // lastPostKey: null,
+    lastPost: null,
   };
+
 
   componentDidMount() {
 
+    const me = this;
+
     chatRef.on('child_added', function(data) {
       // addCommentElement(postElement, data.key, data.val().text, data.val().author);
-      //. echo unless we wrote the message
-      // console.log(data.val());
-      const post = data.val();
+      //. log unless we just wrote the message!
       //. add pic url also
-      // const datetime = dayjs(post.createdAt).format('YYYY-MM-DD HH:mm:ss');
-      // const msg = post.userName + ' [' + datetime + ']: ' + post.text;
-      const msg = post.userName + ' [' + post.createdAt + ']: ' + post.text;
-      console.log(msg);
+      // console.log(data);
+      const post = data.val();
+      // console.log(post);
+      // if (me.state.lastPostKey !== data.key) {
+      // if (me.state.lastPost !== post) {
+      const lastPost = me.state.lastPost;
+      if (lastPost && lastPost.userName === post.userName && lastPost.createdAt === post.createdAt) {
+        console.log('(sent ' + post.createdAt + ')');
+      } else {
+        const msg = post.userName + ' [' + post.createdAt + ']: ' + post.text;
+        console.log(msg);
+      }
     });
 
-    const me = this;
     auth.onAuthStateChanged(function(user) {
       if (user) {
         me.setState({ userId: user.uid, userName: user.displayName, userPic: user.photoURL });
@@ -69,6 +79,7 @@ class App extends React.Component {
       }
     });
   }
+
 
   _handleOtherCommands = (cmd, print) => {
 
@@ -82,18 +93,22 @@ class App extends React.Component {
 
     const text = cmd.join(' '); //. dubious, but cmd is an array of words, not a string
     const createdAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    //. store userId not userName, lookup nickname and imgurl
     const post = {
-      userName: this.state.userName,
+      userId: this.state.userId,
+      userName: this.state.userName, //. ditch this
       text,
       createdAt,
     };
-    chatRef.push().set(post);
+    // chatRef.push().set(post); // add message to chatlog
+    this.setState({ lastPost: post }, () => chatRef.push().set(post));
+    // const key = chatRef.push().set(post).key; // add message to chatlog and save key
+    // this.setState({ lastPostKey: key });
   }
   
   render() {
     return (
       <div className="container">
-
         <SignIn />
         <Terminal
           commandPassThrough={this._handleOtherCommands}
@@ -106,7 +121,6 @@ class App extends React.Component {
           watchConsoleLogging
           promptSymbol="> "
         />
-
       </div>
     );
   }
