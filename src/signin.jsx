@@ -7,8 +7,9 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 import './signin.css';
 
-// sign up with email and sign in with email, facebook, google
+
 class SignIn extends React.Component {
+
   state = {
     isSignedIn: false,
   };
@@ -33,6 +34,7 @@ class SignIn extends React.Component {
     }
     return (
       <div>
+        {/* this works but needs styling */}
         {/* <p>Welcome {auth.currentUser.displayName}!</p> */}
         {/* <button onClick={() => auth.signOut()}>Signout</button> */}
       </div>
@@ -41,4 +43,4 @@ class SignIn extends React.Component {
 }
 
 export default SignIn;
-// export default userIsNotAuthenticated(SignIn);
+// export default userIsNotAuthenticated(SignIn); //. ?

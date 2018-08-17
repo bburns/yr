@@ -28,6 +28,7 @@ export const uiConfig = {
     //   document.getElementById('loader').style.display = 'none';
     // }
   },  
+  // // works!
   // // Terms of service url.
   // tosUrl: '<your-tos-url>',
   // // Privacy policy url.
