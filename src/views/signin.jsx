@@ -32,11 +32,13 @@ class SignIn extends React.Component {
   render() {
     if (!this.state.isSignedIn) {
       return (
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+        <div className="signin">
+          <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+        </div>
       );
     }
     return (
-      <div>
+      <div className="signin">
         {/* this works but needs styling */}
         {/* <p>Welcome {auth.currentUser.displayName}!</p> */}
         <button onClick={() => auth.signOut()}>Signout</button>
