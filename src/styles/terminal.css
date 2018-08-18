@@ -5,3 +5,19 @@
   color: green;
 }
 
+.terminal-post-createdAt {
+  color: #555;
+  padding-right: 0.5em;
+  font-size: 0.9em;
+}
+
+.terminal-post-userName {
+  color: #777;
+  padding-right: 0.5em;
+  font-size: 0.9em;
+}
+
+.terminal-post-text {
+  /* color: gray; */
+  /* margin-right: 1em; */
+}

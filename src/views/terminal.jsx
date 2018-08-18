@@ -27,7 +27,7 @@ class Terminal extends React.Component {
               return (
                 <div key={createdAt} className="terminal-row">
                   <span className="terminal-post-createdAt">{createdAt}</span>
-                  <span className="terminal-post-username">{userName}</span>
+                  <span className="terminal-post-userName">{userName || 'undefined'}</span>
                   <span className="terminal-post-text">{text}</span>
                 </div>
               );
