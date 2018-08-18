@@ -1,4 +1,5 @@
 // yr
+// inspired by zork
 
 import React from 'react';
 import dayjs from 'dayjs';
@@ -10,8 +11,12 @@ import { auth } from 'lib/firebase/auth';
 import ding from 'assets/sounds/ding.mp3';
 
 const chat = database.ref('/chat');
-const rooms = database.ref('/rooms');
-const users = database.ref('/users');
+// const rooms = database.ref('/rooms');
+// const users = database.ref('/users');
+
+
+// me.setState({ userId: user.uid, userName: user.displayName, userPic: user.photoURL });
+
 
 const welcomeMessage = "Welcome to the dark forest. An ancient path leads onwards...";
 
@@ -52,21 +57,17 @@ class App extends React.Component {
     });
 
     auth.onAuthStateChanged( user => {
-      // me.setState({ userId: user.uid, userName: user.displayName, userPic: user.photoURL });
       me.setState({ user });
     });
   }
 
-  //.. this works but duplicates work of other fn on first load, so had to set rows:[]
   _showAll = () => {
     const me = this;
     chat.once('value').then(snapshot => {
-      me.setState(() => ({rows:[]}), (state) => {
-        const chatDict = snapshot.val();
-        const chatRows = Object.values(chatDict);
-        chatRows.forEach(row => row.type = 'post');
-        me.setState((state) => ({ rows: chatRows }), () => initialDataLoaded = true);
-      });
+      const chatDict = snapshot.val();
+      const chatRows = Object.values(chatDict);
+      chatRows.forEach(row => row.type = 'post');
+      me.setState(() => ({ rows: chatRows }), () => initialDataLoaded = true);
     });
   }
 
