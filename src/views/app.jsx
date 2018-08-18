@@ -74,6 +74,11 @@ class App extends React.Component {
     // const key = chat.push().set(post).key; // add message to chatlog and save key
     // this.setState({ lastPostKey: key });
   }
+
+  _handleInput = (str) => {
+    // console.log(e);
+    alert(str);
+  }
   
   render() {
     return (
