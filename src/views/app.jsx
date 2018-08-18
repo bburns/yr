@@ -40,8 +40,7 @@ class App extends React.Component {
       //. add pic url also
       const post = data.val();
       const msg = '[' + post.createdAt + '] ' + post.userName + ': ' + post.text;
-      console.log(msg);
-      me.setState(() => { rows: me.state.rows.push(msg) });
+      me.setState((state) => ({ rows: [...state.rows, msg] }));
     });
 
     auth.onAuthStateChanged( user => {
@@ -61,13 +60,13 @@ class App extends React.Component {
     //   });
     // } else {
 
-    const text = cmd.join(' '); //. dubious, but cmd is an array of words, not a string
+    // const text = cmd.join(' '); //. dubious, but cmd is an array of words, not a string
     const createdAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
     //. store userId, then later lookup nickname and imgurl
     const post = {
       userId: this.state.user.uid,
       userName: this.state.user.displayName, //. ditch this
-      text,
+      text: str,
       createdAt,
     };
     // chat.push().set(post); // add message to chatlog
@@ -77,6 +76,10 @@ class App extends React.Component {
   }
   
   render() {
+    // if (!this.state.user) {
+    //   return <SignIn />;
+    // }
+    console.log(this.state.rows);
     return (
       <div className="container">
         <SignIn />

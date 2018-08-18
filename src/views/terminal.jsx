@@ -5,16 +5,18 @@ import React from 'react';
 
 
 class Terminal extends React.Component {
+
   state = {
   };
 
-  componentDidMount() {
-  }
+  // componentDidMount() {
+  // }
 
-  componentWillUnmount() {
-  }  
+  // componentWillUnmount() {
+  // }  
 
   render() {
+    console.log(this.props.rows);
     return (
       <div>
         {this.props.rows.map(row => (
