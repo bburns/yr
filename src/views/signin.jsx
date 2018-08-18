@@ -10,6 +10,7 @@ class SignIn extends React.Component {
 
   state = {
     isSignedIn: false,
+    // windowReloaded: false,
   };
 
   // Listen to the Firebase Auth state and set the local state.
@@ -18,7 +19,13 @@ class SignIn extends React.Component {
         (user) => {
           this.setState(
             {isSignedIn: !!user},
-            // () => window.location.reload()
+            () => { this.props.onSignInSignOut(user) },
+            // () => {
+              // if (!this.state.windowReloaded) {
+                // window.location.reload();
+                // this.setState({windowReloaded: true});
+              // }
+            // },
           );
         }
     );

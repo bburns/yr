@@ -51,6 +51,22 @@ class App extends React.Component {
     });
   }
 
+  _showAll = () => {
+    alert('showall');
+  }
+
+  _hideAll = () => {
+    alert('hideall');
+  }
+
+  _handleSignInSignOut = (user) => {
+    if (user) {
+      this._showAll();
+    } else {
+      this._hideAll();
+    }
+    // window.location.reload();
+  }
 
   _handleInput = (str) => {
 
@@ -80,7 +96,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <SignIn />
+        <SignIn onSignInSignOut={this._handleSignInSignOut} />
         <Terminal rows={this.state.rows} handleInput={this._handleInput} prompt="> " />
       </div>
     );
