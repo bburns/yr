@@ -1,19 +1,25 @@
 
-.terminal input {
+.terminal-input {
+  width: 100%;
+}
+.terminal-input input {
   border: none;
   background: black;
   color: green;
+  width: 95%;
+  display: inline-block;
+  border: 1px dotted #333;
 }
 
 .terminal-post-createdAt {
   color: #555;
-  font-size: 0.9em;
+  font-size: 0.7em;
 }
 
 .terminal-post-userName {
   color: #777;
   margin-left: 0.5em;
-  font-size: 0.9em;
+  font-size: 0.7em;
 }
 
 .terminal-post-text {
