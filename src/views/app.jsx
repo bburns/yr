@@ -52,11 +52,25 @@ class App extends React.Component {
   }
 
   _showAll = () => {
-    alert('showall');
+    const me = this;
+    chat.once('value').then(snapshot => {
+      me.setState({rows:[]}, (state) => {
+        console.log(snapshot);
+        const chatDict = snapshot.val();
+        console.log(chatDict);
+        const chatRows = Object.values(chatDict);
+        console.log(chatRows);
+        // chat.forEach(s => print(s));
+        chatRows.forEach(row => {
+          row.type = 'post';
+          me.setState((state) => ({ rows: [...state.rows, row] }));
+        });
+      });
+  });
   }
 
   _hideAll = () => {
-    alert('hideall');
+    this.setState({rows:[]});
   }
 
   _handleSignInSignOut = (user) => {
