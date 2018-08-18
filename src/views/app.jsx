@@ -1,12 +1,14 @@
 // yr
 
 import React from 'react';
-import Terminal from 'terminal-in-react';
+// import Terminal from 'terminal-in-react';
 import dayjs from 'dayjs';
+
+import Terminal from './terminal';
+import SignIn from './signin';
 
 import database from 'lib/firebase/database';
 import { auth } from 'lib/firebase/auth';
-import SignIn from './signin';
 
 
 const chat = database.ref('/chat');
@@ -15,72 +17,41 @@ const users = database.ref('/users');
 
 const welcomeMessage = "Welcome to the dark forest. An ancient path leads onwards...";
 
-//. merge commands and descriptions, generate these with code
-const commands = {
-  // glomp: () => alert("glomp glomp glomp!"),
-  // quirp: () => "quirp!",
-  // google: () => window.open('https://www.google.com/', '_blank'),
-  // hiii: () => hiii(),
-  // pok,
-};
-const descriptions = {
-  // glomp: "glomp-attack!",
-  // quirp: "a blue mushroom",
-  // google: "search google.com",
-  // hiii: "say hiii",
-  show: false,
-};
-
-// function hiii() {
-//   return "hiii";
-// }
-
+// const commands = {
+//   // glomp: () => alert("glomp glomp glomp!"),
+//   // quirp: () => "quirp!",
+//   // google: () => window.open('https://www.google.com/', '_blank'),
+// };
 
 
 class App extends React.Component {
 
   state = {
-    userId: null,
-    userName: null,
-    userPic: null,
-    lastPost: null,
-    // lastPostKey: null,
+    user: null,
+    rows: [],
   };
-
 
   componentDidMount() {
 
     const me = this;
 
-    chat.on('child_added', function(data) {
+    chat.on('child_added', data => {
       // addCommentElement(postElement, data.key, data.val().text, data.val().author);
-      //. log unless we just wrote the message!
       //. add pic url also
-      // console.log(data);
       const post = data.val();
-      // console.log(post);
-      // if (me.state.lastPostKey !== data.key) {
-      // if (me.state.lastPost !== post) {
-      const lastPost = me.state.lastPost;
-      if (lastPost && lastPost.userName === post.userName && lastPost.createdAt === post.createdAt) {
-        console.log('(sent ' + post.createdAt + ')');
-      } else {
-        const msg = '[' + post.createdAt + '] ' + post.userName + ': ' + post.text;
-        console.log(msg);
-      }
+      const msg = '[' + post.createdAt + '] ' + post.userName + ': ' + post.text;
+      console.log(msg);
+      me.setState(() => { rows: me.state.rows.push(msg) });
     });
 
-    auth.onAuthStateChanged(function(user) {
-      if (user) {
-        me.setState({ userId: user.uid, userName: user.displayName, userPic: user.photoURL });
-      } else {
-        me.setState({ userId: null, userName: null, userPic: null });
-      }
+    auth.onAuthStateChanged( user => {
+      // me.setState({ userId: user.uid, userName: user.displayName, userPic: user.photoURL });
+      me.setState({ user });
     });
   }
 
 
-  _handleOtherCommands = (cmd, print) => {
+  _handleInput = (str, print) => {
 
     // if (cmd[0] === 'review') {
     //   chat.once('value').then(function(snapshot) {
@@ -92,10 +63,10 @@ class App extends React.Component {
 
     const text = cmd.join(' '); //. dubious, but cmd is an array of words, not a string
     const createdAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
-    //. store userId not userName, lookup nickname and imgurl
+    //. store userId, then later lookup nickname and imgurl
     const post = {
-      userId: this.state.userId,
-      userName: this.state.userName, //. ditch this
+      userId: this.state.user.uid,
+      userName: this.state.user.displayName, //. ditch this
       text,
       createdAt,
     };
@@ -109,20 +80,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <SignIn />
-        <Terminal
-          commandPassThrough={this._handleOtherCommands}
-          color="green"
-          backgroundColor="black"
-          barColor="black"
-          commands={commands}
-          descriptions={descriptions}
-          msg={welcomeMessage}
-          watchConsoleLogging
-          promptSymbol="> "
-          startState="maximised"
-          hideTopBar
-          allowTabs={false}
-        />
+        <Terminal rows={this.state.rows} handleInput={this._handleInput} />
       </div>
     );
   }
