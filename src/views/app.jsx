@@ -65,7 +65,7 @@ class App extends React.Component {
       if (lastPost && lastPost.userName === post.userName && lastPost.createdAt === post.createdAt) {
         console.log('(sent ' + post.createdAt + ')');
       } else {
-        const msg = post.userName + ' [' + post.createdAt + ']: ' + post.text;
+        const msg = '[' + post.createdAt + '] ' + post.userName + ': ' + post.text;
         console.log(msg);
       }
     });
@@ -119,6 +119,9 @@ class App extends React.Component {
           msg={welcomeMessage}
           watchConsoleLogging
           promptSymbol="> "
+          startState="maximised"
+          hideTopBar
+          allowTabs={false}
         />
       </div>
     );
