@@ -51,6 +51,7 @@ class App extends React.Component {
     });
   }
 
+  //.. this works but duplicates work of other fn on first load, so had to set rows:[]
   _showAll = () => {
     const me = this;
     chat.once('value').then(snapshot => {
@@ -66,7 +67,7 @@ class App extends React.Component {
           me.setState((state) => ({ rows: [...state.rows, row] }));
         });
       });
-  });
+    });
   }
 
   _hideAll = () => {
