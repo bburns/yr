@@ -1,12 +1,10 @@
 // yr
 
 import React from 'react';
-// import Terminal from 'terminal-in-react';
 import dayjs from 'dayjs';
 
 import Terminal from './terminal';
 import SignIn from './signin';
-
 import database from 'lib/firebase/database';
 import { auth } from 'lib/firebase/auth';
 
@@ -28,6 +26,7 @@ class App extends React.Component {
 
   state = {
     user: null,
+    header: "The Blue Loft",
     rows: [],
   };
 
@@ -36,7 +35,6 @@ class App extends React.Component {
     const me = this;
 
     chat.on('child_added', data => {
-      // addCommentElement(postElement, data.key, data.val().text, data.val().author);
       //. add pic url also
       const row = data.val();
       row.type = 'post';
@@ -112,7 +110,12 @@ class App extends React.Component {
     return (
       <div className="container">
         <SignIn onSignInSignOut={this._handleSignInSignOut} />
-        <Terminal rows={this.state.rows} handleInput={this._handleInput} prompt="> " />
+        <Terminal
+          rows={this.state.rows}
+          handleInput={this._handleInput}
+          prompt="> "
+          header={this.state.header}
+        />
       </div>
     );
   }

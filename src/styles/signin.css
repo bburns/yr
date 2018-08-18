@@ -1,8 +1,22 @@
 
 .signin {
-  float: right;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
 }
-
+.signin button {
+  font-size: 0.8em;
+  color: #777;
+  background: black;
+  border: 1px solid #333;
+  padding: 1px 10px;
+  font-family: georgia, serif;
+}
+.signin button:hover {
+  /* background: #181818; */
+  color: #aaa;
+}
 
 .firebaseui-idp-button {
   background-color: #ddd !important;

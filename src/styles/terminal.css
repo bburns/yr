@@ -1,29 +1,38 @@
 
+.terminal-header {
+  position: fixed;
+  background: black;
+  width: 100%;
+  border-bottom: 1px solid #333;;
+}
+
+.terminal-row {
+  display: flex;
+}
+.terminal-post-header {
+  font-size: 0.8em;
+  flex-shrink: 0;
+}
+.terminal-post-createdAt {
+  color: #555;
+  margin-right: 0.5em;
+}
+.terminal-post-userName {
+  color: #777;
+  margin-right: 0.5em;
+}
+.terminal-post-text {
+}
+
 .terminal-input {
   width: 100%;
 }
 .terminal-input input {
+  font-family: garamond, serif;
   border: none;
   background: black;
   color: green;
   width: 95%;
   display: inline-block;
   border: 1px dotted #333;
-}
-
-.terminal-post-createdAt {
-  color: #555;
-  font-size: 0.7em;
-}
-
-.terminal-post-userName {
-  color: #777;
-  margin-left: 0.5em;
-  font-size: 0.7em;
-}
-
-.terminal-post-text {
-  margin-left: 0.5em;
-  /* color: gray; */
-  /* margin-right: 1em; */
 }
