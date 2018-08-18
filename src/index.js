@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'; // provide Redux store to all components
 
-import './index.css';
-import App from './App';
+import App from 'views/app';
 import store from 'state/store';
+import 'styles/index.css';
 
 // get tree of ui elements
 // note: jsx code like this gets converted to React.createElement calls by Babel -

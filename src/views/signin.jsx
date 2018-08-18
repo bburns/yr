@@ -5,8 +5,6 @@ import React from 'react';
 import { auth, uiConfig } from 'lib/firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-import './signin.css';
-
 
 class SignIn extends React.Component {
 
@@ -17,7 +15,12 @@ class SignIn extends React.Component {
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
     this.unregisterAuthObserver = auth.onAuthStateChanged(
-        (user) => this.setState({isSignedIn: !!user})
+        (user) => {
+          this.setState(
+            {isSignedIn: !!user},
+            // () => window.location.reload()
+          );
+        }
     );
   }
 
@@ -36,7 +39,7 @@ class SignIn extends React.Component {
       <div>
         {/* this works but needs styling */}
         {/* <p>Welcome {auth.currentUser.displayName}!</p> */}
-        {/* <button onClick={() => auth.signOut()}>Signout</button> */}
+        <button onClick={() => auth.signOut()}>Signout</button>
       </div>
     );  
   }

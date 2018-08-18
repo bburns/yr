@@ -7,13 +7,15 @@ import dayjs from 'dayjs';
 import database from 'lib/firebase/database';
 import { auth } from 'lib/firebase/auth';
 import SignIn from './signin';
-import './App.css';
 
 
-const chatRef = database.ref('/chat');
+const chat = database.ref('/chat');
+const rooms = database.ref('/rooms');
+const users = database.ref('/users');
 
 const welcomeMessage = "Welcome to the dark forest. An ancient path leads onwards...";
 
+//. merge commands and descriptions, generate these with code
 const commands = {
   // glomp: () => alert("glomp glomp glomp!"),
   // quirp: () => "quirp!",
@@ -21,7 +23,6 @@ const commands = {
   // hiii: () => hiii(),
   // pok,
 };
-
 const descriptions = {
   // glomp: "glomp-attack!",
   // quirp: "a blue mushroom",
@@ -36,16 +37,14 @@ const descriptions = {
 
 
 
-
-
 class App extends React.Component {
 
   state = {
     userId: null,
     userName: null,
     userPic: null,
-    // lastPostKey: null,
     lastPost: null,
+    // lastPostKey: null,
   };
 
 
@@ -53,7 +52,7 @@ class App extends React.Component {
 
     const me = this;
 
-    chatRef.on('child_added', function(data) {
+    chat.on('child_added', function(data) {
       // addCommentElement(postElement, data.key, data.val().text, data.val().author);
       //. log unless we just wrote the message!
       //. add pic url also
@@ -84,7 +83,7 @@ class App extends React.Component {
   _handleOtherCommands = (cmd, print) => {
 
     // if (cmd[0] === 'review') {
-    //   chatRef.once('value').then(function(snapshot) {
+    //   chat.once('value').then(function(snapshot) {
     //     const chatDict = snapshot.val();
     //     const chat = Object.values(chatDict);
     //     chat.forEach(s => print(s));
@@ -100,9 +99,9 @@ class App extends React.Component {
       text,
       createdAt,
     };
-    // chatRef.push().set(post); // add message to chatlog
-    this.setState({ lastPost: post }, () => chatRef.push().set(post));
-    // const key = chatRef.push().set(post).key; // add message to chatlog and save key
+    // chat.push().set(post); // add message to chatlog
+    this.setState({ lastPost: post }, () => chat.push().set(post));
+    // const key = chat.push().set(post).key; // add message to chatlog and save key
     // this.setState({ lastPostKey: key });
   }
   
