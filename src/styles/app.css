@@ -2,6 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background: black;
+  color: green;
 }
 
 .container {
@@ -10,8 +12,6 @@ body {
   /* align-items: center; */
   /* height: 80vh; */
   /* padding-top: 1em; */
-  background: black;
-  color: green;
 }
 
 .terminal-base {

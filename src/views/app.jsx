@@ -76,14 +76,10 @@ class App extends React.Component {
   }
   
   render() {
-    // if (!this.state.user) {
-    //   return <SignIn />;
-    // }
-    console.log(this.state.rows);
     return (
       <div className="container">
         <SignIn />
-        <Terminal rows={this.state.rows} handleInput={this._handleInput} />
+        <Terminal rows={this.state.rows} handleInput={this._handleInput} prompt="> " />
       </div>
     );
   }
