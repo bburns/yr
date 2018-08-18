@@ -9,18 +9,10 @@ class Terminal extends React.Component {
   state = {
   };
 
-  // componentDidMount() {
-  // }
-
-  // componentWillUnmount() {
-  // }  
   _onKeyUp = (e) => {
-    console.log(e);
-    console.log(e.target);
-    console.log(e.keyCode);
     if (e.keyCode === 13) {
-      console.log(e.target.value);
       this.props.handleInput(e.target.value)
+      e.target.value = '';
     }
   }
 
@@ -29,11 +21,18 @@ class Terminal extends React.Component {
       <div className="terminal">
 
         <div className="terminal-rows">
-          {this.props.rows.map(row => (
-            <div key={row.msg} className="terminal-row">
-              {row}
-            </div>
-          ))}
+          {this.props.rows.map(row => {
+            if (row.type === 'post') {
+              const { createdAt, userName, text } = row;
+              return (
+                <div key={createdAt} className="terminal-row">
+                  <span className="terminal-post-createdAt">{createdAt}</span>
+                  <span className="terminal-post-username">{userName}</span>
+                  <span className="terminal-post-text">{text}</span>
+                </div>
+              );
+            }
+          })}
         </div>
 
         <div className="terminal-input">

@@ -38,9 +38,11 @@ class App extends React.Component {
     chat.on('child_added', data => {
       // addCommentElement(postElement, data.key, data.val().text, data.val().author);
       //. add pic url also
-      const post = data.val();
-      const msg = '[' + post.createdAt + '] ' + post.userName + ': ' + post.text;
-      me.setState((state) => ({ rows: [...state.rows, msg] }));
+      const row = data.val();
+      row.type = 'post';
+      // const msg = '[' + post.createdAt + '] ' + post.userName + ': ' + post.text;
+      // me.setState((state) => ({ rows: [...state.rows, msg] }));
+      me.setState((state) => ({ rows: [...state.rows, row] }));
     });
 
     auth.onAuthStateChanged( user => {
@@ -50,7 +52,7 @@ class App extends React.Component {
   }
 
 
-  _handleInput = (str, print) => {
+  _handleInput = (str) => {
 
     // if (cmd[0] === 'review') {
     //   chat.once('value').then(function(snapshot) {
@@ -73,11 +75,6 @@ class App extends React.Component {
     this.setState({ lastPost: post }, () => chat.push().set(post));
     // const key = chat.push().set(post).key; // add message to chatlog and save key
     // this.setState({ lastPostKey: key });
-  }
-
-  _handleInput = (str) => {
-    // console.log(e);
-    alert(str);
   }
   
   render() {
