@@ -7,7 +7,7 @@ import Terminal from './terminal';
 import SignIn from './signin';
 import database from 'lib/firebase/database';
 import { auth } from 'lib/firebase/auth';
-
+import ding from 'assets/sounds/ding.mp3';
 
 const chat = database.ref('/chat');
 const rooms = database.ref('/rooms');
@@ -15,18 +15,25 @@ const users = database.ref('/users');
 
 const welcomeMessage = "Welcome to the dark forest. An ancient path leads onwards...";
 
+function playSound() {
+  const audio = new Audio(ding);
+  audio.play();
+}
+
+
 // const commands = {
 //   // glomp: () => alert("glomp glomp glomp!"),
 //   // quirp: () => "quirp!",
 //   // google: () => window.open('https://www.google.com/', '_blank'),
 // };
 
+let initialDataLoaded = false;
 
 class App extends React.Component {
 
   state = {
     user: null,
-    header: "The Blue Loft",
+    room: "The Blue Loft",
     rows: [],
   };
 
@@ -36,11 +43,12 @@ class App extends React.Component {
 
     chat.on('child_added', data => {
       //. add pic url also
-      const row = data.val();
-      row.type = 'post';
-      // const msg = '[' + post.createdAt + '] ' + post.userName + ': ' + post.text;
-      // me.setState((state) => ({ rows: [...state.rows, msg] }));
-      me.setState((state) => ({ rows: [...state.rows, row] }));
+      if (initialDataLoaded) {
+        const row = data.val();
+        row.type = 'post';
+        me.setState((state) => ({ rows: [...state.rows, row] }));
+        playSound();
+      }
     });
 
     auth.onAuthStateChanged( user => {
@@ -53,17 +61,11 @@ class App extends React.Component {
   _showAll = () => {
     const me = this;
     chat.once('value').then(snapshot => {
-      me.setState({rows:[]}, (state) => {
-        console.log(snapshot);
+      me.setState(() => ({rows:[]}), (state) => {
         const chatDict = snapshot.val();
-        console.log(chatDict);
         const chatRows = Object.values(chatDict);
-        console.log(chatRows);
-        // chat.forEach(s => print(s));
-        chatRows.forEach(row => {
-          row.type = 'post';
-          me.setState((state) => ({ rows: [...state.rows, row] }));
-        });
+        chatRows.forEach(row => row.type = 'post');
+        me.setState((state) => ({ rows: chatRows }), () => initialDataLoaded = true);
       });
     });
   }
@@ -114,7 +116,7 @@ class App extends React.Component {
           rows={this.state.rows}
           handleInput={this._handleInput}
           prompt="> "
-          header={this.state.header}
+          header={this.state.room}
         />
       </div>
     );

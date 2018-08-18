@@ -34,10 +34,35 @@ function rewireAddHjson(config, env, options = {}) {
 }
 
 
+// rewire config to include mp3 files
+// see https://github.com/webpack-contrib/raw-loader
+function rewireAddMp3(config, env, options = {}) {
+
+  const mp3Extension = /\.mp3$/;
+
+  // exclude mp3 files from ______
+  const excludeRule = getLoader(config.module.rules, rule => rule.exclude);
+  excludeRule.exclude.push(mp3Extension);
+
+  // add a rule to use 'raw-loader' for mp3 files
+  const mp3Rule = {
+    test: mp3Extension,
+    loader: 'file-loader',
+  };
+  config.module.rules.push(mp3Rule);
+
+  // console.log(config.module.rules);
+
+  return config;
+}
+
+
+
 // modify the existing webpack config
 // see https://github.com/timarney/react-app-rewired
 module.exports = function override(config, env) {
   config = rewireAddHjson(config, env);
+  config = rewireAddMp3(config, env);
   return config;
 };
 
