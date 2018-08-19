@@ -8,7 +8,8 @@ import Terminal from './terminal';
 import SignIn from './signin';
 import database from 'lib/firebase/database';
 import { auth } from 'lib/firebase/auth';
-import ding from 'assets/sounds/ding.mp3';
+// import ding from 'assets/sounds/ding.mp3';
+import ding from 'assets/sounds/phone.mp3';
 
 const chat = database.ref('/chat');
 // const rooms = database.ref('/rooms');
