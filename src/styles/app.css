@@ -1,10 +1,11 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: Consolas, sans-serif;
+  font-size: 0.9em;
   background: black;
-  color: green;
-  font-family: garamond, serif;
+  color: #090;
+  /* font-family: garamond, serif; */
 }
 
 .container {
@@ -36,7 +37,8 @@ body {
   background: black;
   border: 1px solid #333;
   padding: 1px 10px;
-  font-family: georgia, serif;
+  font-family: Consolas, sans-serif;
+  /* font-family: georgia, serif; */
 }
 .signin button:hover {
   /* background: #181818; */

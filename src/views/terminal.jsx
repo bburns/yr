@@ -30,7 +30,8 @@ class Terminal extends React.Component {
             if (row.type === 'post') {
               const { createdAt, userName, userPic, text } = row;
               // see https://github.com/iamkun/dayjs/blob/master/docs/en/API-reference.md#list-of-all-available-formats
-              const datetime = dayjs(createdAt).format("MMM D ddd h:mma"); // eg 'Aug 18 Sat 5:45pm'
+              // const datetime = dayjs(createdAt).format("MMM D ddd h:mma"); // eg 'Aug 18 Sat 5:45pm'
+              const datetime = dayjs(createdAt).format("h:mma ddd MMM D"); // eg '5:45pm Sat Aug 18'
               const username = userName === 'Brian Burns' ? 'Brian' : 'Amanda';
               return <Post key={createdAt} datetime={datetime} username={username} userpic={userPic} text={text} />;
             }
@@ -47,16 +48,24 @@ class Terminal extends React.Component {
   }
 }
 
+// const Post = (props) => (
+//   <div className="terminal-row">
+//     <span className="terminal-post-header">
+//       <span className="terminal-post-datetime">{props.datetime}</span>
+//       <img className="terminal-post-userpic" src={props.userpic} />
+//       <span className="terminal-post-username">{props.username + ':'}</span>
+//     </span>
+//     <span className="terminal-post-text">{props.text}</span>
+//   </div>
+// );
+
 const Post = (props) => (
   <div className="terminal-row">
-    <span className="terminal-post-header">
-      <span className="terminal-post-datetime">{props.datetime}</span>
-      <img className="terminal-post-userpic" src={props.userpic} />
-      <span className="terminal-post-username">{props.username + ':'}</span>
-    </span>
-    <span className="terminal-post-text">{props.text}</span>
+    <span className="terminal-post-username">{props.username}:</span>
+    <span className="terminal-post-text">&nbsp;{props.text}</span>
+    <span className="terminal-post-datetime">&nbsp;{props.datetime}</span>
+    {/* <img className="terminal-post-userpic" src={props.userpic} /> */}
   </div>
 );
-
 
 export default Terminal;

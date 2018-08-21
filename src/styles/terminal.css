@@ -7,7 +7,7 @@
 }
 
 .terminal-row {
-  display: flex;
+  /* display: flex; */
 }
 .terminal-post-header {
   font-size: 0.8em;
@@ -15,11 +15,11 @@
 }
 .terminal-post-datetime {
   color: #555;
-  margin-right: 0.5em;
+  /* margin-right: 0.5em; */
 }
 .terminal-post-username {
-  color: #777;
-  margin-right: 0.5em;
+  color: #999;
+  /* margin-right: 0.5em; */
 }
 .terminal-post-text {
 }
