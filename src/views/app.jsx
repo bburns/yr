@@ -3,11 +3,13 @@
 
 import React from 'react';
 import dayjs from 'dayjs';
+import { auth, uiConfig } from 'lib/firebase/auth';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 import Terminal from './terminal';
-import SignIn from './signin';
+// import SignIn from './signin';
 import database from 'lib/firebase/database';
-import { auth } from 'lib/firebase/auth';
+// import { auth } from 'lib/firebase/auth';
 // import ding from 'assets/sounds/ding.mp3';
 import ding from 'assets/sounds/phone.mp3';
 
@@ -60,7 +62,28 @@ class App extends React.Component {
     auth.onAuthStateChanged( user => {
       me.setState({ user });
     });
+
+    // Listen to the Firebase Auth state and set the local state.
+    this.unregisterAuthObserver = auth.onAuthStateChanged(
+        (user) => {
+          this.setState(
+            {user},
+            () => { this._handleSignInSignOut(user) },
+            // () => {
+              // if (!this.state.windowReloaded) {
+                // window.location.reload();
+                // this.setState({windowReloaded: true});
+              // }
+            // },
+          );
+        }
+    );
   }
+
+  // Make sure we un-register Firebase observers when the component unmounts.
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
+  }  
 
   _showAll = () => {
     const me = this;
@@ -113,7 +136,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <SignIn onSignInSignOut={this._handleSignInSignOut} />
+        <SignIn user={this.state.user} onSignInSignOut={this._handleSignInSignOut} />
         <Terminal
           rows={this.state.rows}
           handleInput={this._handleInput}
@@ -124,5 +147,22 @@ class App extends React.Component {
     );
   }
 }
+
+
+const SignIn = (props) => {
+  if (!props.user) {
+    return (
+      <div className="signin">
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+      </div>
+    );
+  }
+  return (
+    <div className="signin">
+      <button onClick={() => auth.signOut()}>Signout</button>
+    </div>
+  );  
+}
+
 
 export default App;

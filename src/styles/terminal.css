@@ -13,11 +13,11 @@
   font-size: 0.8em;
   flex-shrink: 0;
 }
-.terminal-post-createdAt {
+.terminal-post-datetime {
   color: #555;
   margin-right: 0.5em;
 }
-.terminal-post-userName {
+.terminal-post-username {
   color: #777;
   margin-right: 0.5em;
 }
